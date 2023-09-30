@@ -1,7 +1,65 @@
-<div style="position: absolute; width: 100vw; height: 0%; padding-top: 177.7778vh;
- padding-bottom: 0; box-shadow: 0 2px 0px 0 rgba(63,69,81,0.16); margin-top: -0,4 em; margin-bottom: 0em; overflow: none;
- border-radius: 0px; will-change: transform;" class="mobile-only">
-  <iframe loading="lazy" style="position: absolute; width: 100vw; height: 177.7778vh; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-    src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFg90peCw0&#x2F;view?embed" fullscreen="fullscreen" >
-  </iframe>
-</div>
+# IStud_Platform/app/__init__.py
+from flask import Flask
+
+app = Flask(__name__)
+
+from app import routes
+
+# IStud_Platform/app/routes.py
+from app import app
+
+@app.route('/')
+def index():
+    return "Bem-vindo ao I'Stud Platform!"
+
+# IStud_Platform/config/__init__.py
+# Leave this file empty
+
+# IStud_Platform/config/config.py
+SECRET_KEY = 'your_secret_key_here'
+
+# IStud_Platform/templates/base.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>I'Stud Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <header>
+        <h1>I'Stud Platform</h1>
+    </header>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+
+# IStud_Platform/templates/index.html
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Bem-vindo ao I'Stud Platform</h2>
+    <p>Plataforma de streaming de vídeo especializada em conteúdo acadêmico.</p>
+{% endblock %}
+
+# IStud_Platform/.gitignore
+__pycache__/
+venv/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.idea/
+.vscode/
+*.swp
+
+# IStud_Platform/README.md
+# I'Stud Platform
+
+Esta é a plataforma de streaming de vídeo "I'Stud" voltada para o âmbito acadêmico.
+
+# IStud_Platform/requirements.txt
+Flask==2.0.1
